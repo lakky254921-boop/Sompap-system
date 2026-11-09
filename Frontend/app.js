@@ -1,5 +1,5 @@
-// กำหนด URL ของ Backend API (ใช้ Relative Path รองรับทั้ง Local และ Kubernetes)
-const API_URL = '/api/tickets';
+// กำหนด URL ของ Backend API
+const API_URL = 'http://localhost:3000/api/tickets';
 
 // โหลดรายการคำร้องทันทีเมื่อเปิดหน้าเว็บ
 document.addEventListener('DOMContentLoaded', () => {
@@ -62,7 +62,7 @@ async function loadTickets() {
                 <td>${escapeHtml(ticket.category || '')}</td>
                 <td>${escapeHtml(ticket.priority || 'Medium')}</td>
                 <td>
-                    <span style="padding: 3px 8px; border-radius: 4px; font-size: 0.9em; background-color: ${getStatusColor(ticket.status)};">
+                    <span style="padding: 4px 10px; border-radius: 6px; font-size: 0.85em; font-weight: 500; background-color: ${getStatusColor(ticket.status)};">
                         ${escapeHtml(ticket.status || 'Pending')}
                     </span>
                 </td>
@@ -80,7 +80,7 @@ async function loadTickets() {
 
     } catch (error) {
         console.error('Error loading tickets:', error);
-        tableBody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: red;">เชื่อมต่อ Server ไม่สำเร็จ</td></tr>`;
+        tableBody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: #ef4444; font-weight: 500;">เชื่อมต่อ Server ไม่สำเร็จ (ตรวจสอบพอร์ต 3000)</td></tr>`;
     }
 }
 
@@ -104,13 +104,13 @@ async function updateTicketStatus(id, newStatus) {
     }
 }
 
-// ฟังก์ชันช่วยกำหนดสีสถานะ
+// ฟังก์ชันกำหนดสี Badge สถานะ
 function getStatusColor(status) {
     if (!status) return '#e2e3e5';
     const s = status.toString().trim();
-    if (s === 'Resolved') return '#d4edda'; // เขียวอ่อน
-    if (s === 'In Progress') return '#cce5ff'; // ฟ้าอ่อน
-    return '#e2e3e5'; // เทา (Pending)
+    if (s === 'Resolved') return '#d1fae5'; // เขียวอ่อน
+    if (s === 'In Progress') return '#dbeafe'; // ฟ้าอ่อน
+    return '#f1f5f9'; // เทาอ่อน (Pending)
 }
 
 // ฟังก์ชันป้องกัน XSS
