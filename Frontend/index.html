@@ -2,33 +2,72 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8">
-  <title>IT Helpdesk System</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    form, table { margin-bottom: 20px; width: 100%; }
-    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IT Helpdesk System - แจ้งซ่อมอุปกรณ์ไอที</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h2>แจ้งซ่อมอุปกรณ์ไอที</h2>
-  <form id="ticketForm">
-    <input type="text" id="title" placeholder="หัวข้อปัญหา" required>
-    <select id="category">
-      <option value="Hardware">Hardware</option>
-      <option value="Network">Network</option>
-      <option value="Software">Software</option>
-    </select>
-    <input type="text" id="description" placeholder="รายละเอียด">
-    <button type="submit">ส่งเรื่อง</button>
-  </form>
+  <div class="container">
+    <h1>🛠️ ระบบรับเรื่องและติดตามการแจ้งซ่อมอุปกรณ์ไอที</h1>
 
-  <h2>รายการแจ้งซ่อมทั้งหมด</h2>
-  <table>
-    <thead>
-      <tr><th>ID</th><th>หัวข้อ</th><th>หมวดหมู่</th><th>สถานะ</th><th>จัดการ</th></tr>
-    </thead>
-    <tbody id="ticketTable"></tbody>
-  </table>
+    <!-- Action 1: ฟอร์มสร้าง Ticket -->
+    <section class="card">
+      <h2>1. แจ้งปัญหาอุปกรณ์ไอที (Create Ticket)</h2>
+      <form id="ticketForm">
+        <div class="form-group">
+          <label for="title">หัวข้อปัญหา:</label>
+          <input type="text" id="title" required placeholder="เช่น จอภาพไม่ติด, ต่อ Wi-Fiไม่ได้">
+        </div>
+        
+        <div class="form-group">
+          <label for="category">หมวดหมู่:</label>
+          <select id="category">
+            <option value="Hardware">Hardware</option>
+            <option value="Network">Network</option>
+            <option value="Software">Software</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="priority">ความด่วน:</label>
+          <select id="priority">
+            <option value="Low">Low (ต่ำ)</option>
+            <option value="Medium" selected>Medium (ปานกลาง)</option>
+            <option value="High">High (สูง)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="description">รายละเอียดเพิ่มเติม:</label>
+          <textarea id="description" rows="3" placeholder="ระบุรายละเอียดปัญหาเพิ่มเติม..."></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit">ส่งคำร้องแจ้งซ่อม</button>
+      </form>
+    </section>
+
+    <!-- Action 2 & 3: ตารางแสดงรายการคำร้อง และปุ่มปรับสถานะ -->
+    <section class="card">
+      <h2>2. รายการคำร้องทั้งหมดและติดตามสถานะ (View & Update Status)</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>หัวข้อปัญหา</th>
+            <th>หมวดหมู่</th>
+            <th>ความด่วน</th>
+            <th>สถานะ</th>
+            <th>จัดการสถานะ (IT Support)</th>
+          </tr>
+        </thead>
+        <tbody id="ticketTableBody">
+          <!-- ข้อมูลจาก API จะถูกนำมาแทรกตรงนี้ผ่าน app.js -->
+        </tbody>
+      </table>
+    </section>
+  </div>
+
+  <!-- เรียกใช้งาน JavaScript จากไฟล์ app.js -->
   <script src="app.js"></script>
 </body>
 </html>
