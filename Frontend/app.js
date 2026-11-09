@@ -1,5 +1,5 @@
-// กำหนด URL ของ Backend API
-const API_URL = 'http://localhost:3000/api/tickets';
+// กำหนด URL ของ Backend API (ใช้ Relative Path รองรับทั้ง Local และ Kubernetes)
+const API_URL = '/api/tickets';
 
 // โหลดรายการคำร้องทันทีเมื่อเปิดหน้าเว็บ
 document.addEventListener('DOMContentLoaded', () => {
@@ -80,7 +80,7 @@ async function loadTickets() {
 
     } catch (error) {
         console.error('Error loading tickets:', error);
-        tableBody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: red;">เชื่อมต่อ Server ไม่สำเร็จ (ตรวจสอบพอร์ต 3000)</td></tr>`;
+        tableBody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: red;">เชื่อมต่อ Server ไม่สำเร็จ</td></tr>`;
     }
 }
 
