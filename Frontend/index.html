@@ -3,71 +3,96 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IT Helpdesk System - แจ้งซ่อมอุปกรณ์ไอที</title>
+  <title>IT Helpdesk System - ระบบรับเรื่องและติดตามการแจ้งซ่อมไอที</title>
   <link rel="stylesheet" href="styles.css">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="container">
-    <h1>🛠️ ระบบรับเรื่องและติดตามการแจ้งซ่อมอุปกรณ์ไอที</h1>
 
+  <!-- Hero Banner Header (สไตล์ Blue Gradient Techแบบ Sketchfab) -->
+  <header class="hero-banner">
+    <div class="hero-container">
+      <div class="hero-text">
+        <span class="hero-badge">🛠️ IT Helpdesk Service Platform</span>
+        <h1>ระบบรับเรื่องและติดตามการแจ้งซ่อมอุปกรณ์ไอที</h1>
+        <p>แจ้งปัญหาอุปกรณ์ไอทีขัดข้อง ติดตามสถานะงานซ่อมแบบ Real-time และให้บริการโดยทีม IT Support มืออาชีพ</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Layout -->
+  <main class="main-container">
+    
     <!-- Action 1: ฟอร์มสร้าง Ticket -->
-    <section class="card">
-      <h2>1. แจ้งปัญหาอุปกรณ์ไอที (Create Ticket)</h2>
+    <section class="card form-card">
+      <div class="card-header">
+        <h2>1. แจ้งปัญหาอุปกรณ์ไอที <span>(Create Ticket)</span></h2>
+      </div>
       <form id="ticketForm">
-        <div class="form-group">
-          <label for="title">หัวข้อปัญหา:</label>
-          <input type="text" id="title" required placeholder="เช่น จอภาพไม่ติด, ต่อ Wi-Fiไม่ได้">
-        </div>
-        
-        <div class="form-group">
-          <label for="category">หมวดหมู่:</label>
-          <select id="category">
-            <option value="Hardware">Hardware</option>
-            <option value="Network">Network</option>
-            <option value="Software">Software</option>
-          </select>
+        <div class="form-row">
+          <div class="form-group flex-2">
+            <label for="title">หัวข้อปัญหา <span class="required">*</span></label>
+            <input type="text" id="title" required placeholder="เช่น จอภาพไม่ติด, ต่อ Wi-Fi ไม่ได้">
+          </div>
+          
+          <div class="form-group flex-1">
+            <label for="category">หมวดหมู่</label>
+            <select id="category">
+              <option value="Hardware">💻 Hardware (อุปกรณ์)</option>
+              <option value="Network">🌐 Network (เครือข่าย)</option>
+              <option value="Software">💿 Software (โปรแกรม)</option>
+            </select>
+          </div>
+
+          <div class="form-group flex-1">
+            <label for="priority">ระดับความด่วน</label>
+            <select id="priority">
+              <option value="Low">Low (ต่ำ)</option>
+              <option value="Medium" selected>Medium (ปานกลาง)</option>
+              <option value="High">High (ด่วนมาก)</option>
+            </select>
+          </div>
         </div>
 
         <div class="form-group">
-          <label for="priority">ความด่วน:</label>
-          <select id="priority">
-            <option value="Low">Low (ต่ำ)</option>
-            <option value="Medium" selected>Medium (ปานกลาง)</option>
-            <option value="High">High (สูง)</option>
-          </select>
+          <label for="description">รายละเอียดเพิ่มเติม</label>
+          <textarea id="description" rows="3" placeholder="ระบุรายละเอียดของปัญหาเพิ่มเติม เพื่อความรวดเร็วในการตรวจสอบ..."></textarea>
         </div>
 
-        <div class="form-group">
-          <label for="description">รายละเอียดเพิ่มเติม:</label>
-          <textarea id="description" rows="3" placeholder="ระบุรายละเอียดปัญหาเพิ่มเติม..."></textarea>
-        </div>
-
-        <button type="submit" class="btn-submit">ส่งคำร้องแจ้งซ่อม</button>
+        <button type="submit" class="btn-submit">
+          <span>ส่งคำร้องแจ้งซ่อม</span> 🚀
+        </button>
       </form>
     </section>
 
     <!-- Action 2 & 3: ตารางแสดงรายการคำร้อง และปุ่มปรับสถานะ -->
-    <section class="card">
-      <h2>2. รายการคำร้องทั้งหมดและติดตามสถานะ (View & Update Status)</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>หัวข้อปัญหา</th>
-            <th>หมวดหมู่</th>
-            <th>ความด่วน</th>
-            <th>สถานะ</th>
-            <th>จัดการสถานะ (IT Support)</th>
-          </tr>
-        </thead>
-        <tbody id="ticketTableBody">
-          <!-- ข้อมูลจาก API จะถูกนำมาแทรกตรงนี้ผ่าน app.js -->
-        </tbody>
-      </table>
+    <section class="card table-card">
+      <div class="card-header">
+        <h2>2. รายการคำร้องทั้งหมดและติดตามสถานะ <span>(View & Update Status)</span></h2>
+      </div>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th width="8%">ID</th>
+              <th width="35%">หัวข้อปัญหา / รายละเอียด</th>
+              <th width="15%">หมวดหมู่</th>
+              <th width="12%">ความด่วน</th>
+              <th width="15%">สถานะปัจจุบัน</th>
+              <th width="15%">จัดการสถานะ (IT Support)</th>
+            </tr>
+          </thead>
+          <tbody id="ticketTableBody">
+            <!-- ข้อมูลจาก API จะถูกนำมาแทรกตรงนี้ผ่าน app.js -->
+          </tbody>
+        </table>
+      </div>
     </section>
-  </div>
+  </main>
 
-  <!-- เรียกใช้งาน JavaScript จากไฟล์ app.js -->
   <script src="app.js"></script>
 </body>
 </html>
